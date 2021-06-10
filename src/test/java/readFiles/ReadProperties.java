@@ -17,8 +17,10 @@ public class ReadProperties {
 
         String fileName = environment.concat("_env.properties");
 
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+
         try {
-            properties.load(new FileInputStream("./src/main/resources/".concat(fileName)));
+            properties.load(classloader.getResourceAsStream(fileName));
 
         } catch (FileNotFoundException e) {
             System.out.println("File is not found");
