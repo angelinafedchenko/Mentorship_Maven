@@ -30,7 +30,7 @@ public class ListTypes {
 
 
 
-    private static Collection createFirstCollection() {
+    public static Collection createFirstCollection() {
         Collection col = new ArrayList();
 
         col.add("1");

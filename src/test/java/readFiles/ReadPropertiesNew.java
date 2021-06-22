@@ -1,27 +1,33 @@
 package readFiles;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.Scanner;
-
 
 
 public class ReadPropertiesNew {
-
+    String environment;
+    String fileName;
     Properties properties;
-    Client bob;
+    ScannerEnv envName;
 
-    public String scanFile() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Select environment");
-        String environment = scanner.nextLine();
-        String fileName = environment.concat("_env.properties");
-        return fileName;
+    static {
+        System.out.println("Static block.");
     }
 
+    public ReadPropertiesNew(String environment) {
+        fileName = environment.concat("_env.properties");
+    }
+
+    public String getName() {
+        return properties.getProperty("Name");
+    }
+
+    public String getPassword() {
+        return properties.getProperty("Password");
+    }
+
+
     public void loadFile() throws IOException {
-        String fileName = scanFile();
         properties = new Properties();
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 
@@ -29,53 +35,46 @@ public class ReadPropertiesNew {
             properties.load(classloader.getResourceAsStream(fileName));
             //properties.load(new FileInputStream("./src/main/resources/".concat(fileName)));
 
-        } catch (FileNotFoundException e) {
-            System.out.println("File is not found");
+        } catch (Exception e) {
+            System.err.println(fileName + " File is not found");
 
         }
+
     }
 
-    public void readFile() {
 
-        bob = new Client(properties.getProperty("Name"), properties.getProperty("Password"));
-//       ==>
-//        for (String key : properties.stringPropertyNames()) {
-//            String value = properties.getProperty(key);
-//            System.out.println(key + " => " + value);
-//        }
-    }
-
-    //       ==>
-//    public String getPassword() {
-//        return properties.getProperty("Password");
-//    }
+//    public void readFile() {
 //
-//    public String getName() {
-//        return properties.getProperty("Name");
+//        //bob = new Client(properties.getProperty("Name"), properties.getProperty("Password"));
+////       ==>
+////        for (String key : properties.stringPropertyNames()) {
+////            String value = properties.getProperty(key);
+////            System.out.println(key + " => " + value);
+////        }
 //    }
 
 
 
-    public class Client {
-
-        private String name;
-        private String password;
-
-        Client (String name, String password) {
-            this.name = name;
-            this.password = password;
-        }
-
-
-        public String getName() {
-            return name;
-        }
-
-
-        public String getPassword() {
-            return password;
-        }
-    }
+//    public class Client {
+//
+//        private String name;
+//        private String password;
+//
+//        Client (String name, String password) {
+//            this.name = name;
+//            this.password = password;
+//        }
+//
+//
+//        public String getName() {
+//            return name;
+//        }
+//
+//
+//        public String getPassword() {
+//            return password;
+//        }
+//    }
 }
 
 
