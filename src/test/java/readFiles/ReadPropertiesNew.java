@@ -5,10 +5,9 @@ import java.util.Properties;
 
 
 public class ReadPropertiesNew {
-    String environment;
+
     String fileName;
     Properties properties;
-    ScannerEnv envName;
 
     static {
         System.out.println("Static block.");
